@@ -1,0 +1,201 @@
+1. What is Express.js?
+
+Answer : Express.js, or simply Express, is a free, open-source, lightweight, and fast backend web application framework for Node.js. It is released as open-source software under the MIT License.
+
+It is designed for building single-page, multi-page, and hybrid web applications and APIs. It is called the de facto standard server framework for Node.js. It was founded and developed by TJ Holowaychuk in 2010 and written in JavaScript.
+
+2. What are some distinctive features of Express?
+
+Answer : As Express is a lightweight, minimal and flexible Node.js web application framework, it provides a robust set of features for web and mobile applications. Following is the list of some distinctive features of this framework:
+
+js can be used to design single-page, multi-page, and hybrid web applications and APIs.
+It allows to set up middleware to respond to HTTP/RESTful Requests.
+It defines a routing table to perform different HTTP operations (method and URL).
+It allows to dynamically rendering HTML Pages based on passing arguments to templates.
+It provides high performance because of its ultra-fast I/O. It prepares a thin layer; therefore, the performance is adequate.
+Its MVC-like structure makes it organize the web application into MVC architecture.
+It provides good database support. It supports RDBMS as well as NoSQL databases.
+It is asynchronous and single-threaded.
+Its robust API makes routing easy.
+
+3. Is Express.js front-end or backend framework?
+
+Answer : Express.js or Express is a JavaScript backend framework. It is mainly designed to develop complete web applications (single-page, multi-page, and hybrid web applications) and APIs. Express is the backend component of the MEAN stack where M stands for MongoDB, which handles database; E stands for Express, which handles backend; A stands for AngularJS, which is for the front-end, and N stands for Node.
+
+4. Why do we use Express.js?
+
+Answer : Express.js is an automatically prebuilt Node.js framework that facilitates us to create server-side web applications faster and smarter. The main reason for choosing Express is its simplicity, minimalism, flexibility, and scalability characteristics.
+
+5. What is the difference between Express.js and Node.js?
+
+Answer : Node.js is an open-source, cross-platform run-time environment used for executing JavaScript code outside of a browser. Node.js is not a framework or a programming language; it is a platform that acts as a web server. Many big companies such as Paypal, Uber, Netflix, Wallmart, etc., are using this. On the other hand, Express is a small framework based on the functionality of Node.js.
+
+6. How does an Express code look like?
+
+Answer : The express.js program is saved with ".js" extension.
+Example:
+
+var express = require('express');  
+var app = express();  
+app.get('/', function (req, res) {  
+ res.send('Welcome to Express!');  
+});  
+var server = app.listen(8000, function () {  
+ var host = server.address().address;  
+ var port = server.address().port;  
+ console.log('Example app listening at http://%s:%s', host, port);  
+});
+
+7. Write a code to get post a query in Express.js.
+
+Answer : var bodyParser = require('body-parser')  
+app.use( bodyParser.json() ); // to support JSON-encoded  
+app.use(bodyParser.urlencoded({ // to support URL-encoded  
+ extended: true  
+}));
+
+8. Which are the arguments available to an Express JS route handler function?
+
+Answer : Following are the arguments that are available to an Express.js route handler-function:
+
+Req: the request object
+Res: the response object
+Next (optional): It is a function employed to pass management to one of the above route handlers.
+
+9. What is the difference between Express and Django?
+
+Answer : Django is a standalone and lightweight web server for testing and development. On the other hand, Express.js is a Node.js framework that can set the middleware to reply to any HTTP request.
+
+10. How can you enable debugging in Express.js app?
+
+Answer : There are different ways to enable debugging in Express.js app in different Operating Systems
+
+Use the following command on Linux:
+
+DEBUG=express:\*  
+node app.js  
+Use the following command on Windows:
+
+set DEBUG=express:\*  
+node app.js
+
+11. How can you allow CORS in Express.js?
+
+Answer : We can allow CORS in Express.js, by adding the following code in server.js:
+
+app.all('_', function(req, res, next) {  
+res.set('Access-Control-Allow-Origin', '_');  
+res.set('Access-Control-Allow-Methods', 'GET, POST, DELETE, PUT');  
+res.set('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type');  
+if ('OPTIONS' == req.method) return res.send(200);  
+next();  
+});
+
+12. How can you deal with error handling in Express.js? Explain with an example.
+
+Answer : Error handling is much easier in the Express versions over Express 4.0. Use the following steps to do the error handling:
+
+Create an Express.js application. There is no built-in middleware like error handler in express 4.0, so you have to either install a middleware or create a custom one.
+
+Create a Middleware:
+
+Create a middleware as following:
+
+// error handler  
+app.use(function(err, req, res, next) {  
+// set locals, only providing error in development  
+res.locals.message = err.message;  
+res.locals.error = req.app.get('env') === 'development' ? err : {};  
+// render the error page  
+res.status(err.status || 500);  
+res.render('error');  
+});  
+Install Error Handler Middleware:
+
+Install the errorhandler as following:
+
+npm install errorhandler --save  
+Create a variable:
+
+var errorhandler = require('errorhandler')  
+Use the middleware as following:
+
+if (process.env.NODE_ENV === 'development') {  
+ // only use in development  
+ app.use(errorhandler({log: errorNotification}))  
+}  
+function errorNotification(err, str, req) {  
+ var title = 'Error in ' + req.method + ' ' + req.url  
+ notifier.notify({  
+ title: title,  
+ message: str  
+ })  
+}
+
+13. Write the code to start serving static files in Express.js.
+
+Answer : app.use(express.static('public'))  
+app.use('/static', express.static(path.join(\_\_dirname, 'public')))
+
+14. What is Middleware in Express.js? What are the different types of Middleware?
+
+Answer : Middleware is a function invoked by the Express routing layer before the final request handler.
+
+Middleware functions are used to perform the following tasks:
+
+It is used to execute any code.
+It is also used to make changes to the request and the response objects.
+It is responsible for ending the request-response cycle.
+It can call the next middleware function in the stack.
+Type of Middleware
+
+Following are the main types of Middleware:
+
+Application-level Middleware
+Router-level Middleware
+Error-handling Middleware
+Built-in Middleware
+Third-party Middleware
+Application-level middleware: The application-level middleware method is used to bind to the app object using app.use() method. It applies on all routes.
+
+//This middleware will execute for each route.  
+app.use(function (req, res, next) {  
+ console.log('Current Time:', Date.now())  
+ next()  
+})  
+Router-level Middleware: The router-level Middleware is used to bind to a specific instance of express.Router().Built-in Middleware: The built-in Middleware was introduced with version 4.x. It ends the dependency on Connect.
+
+There are the following built-in middleware functions in Express.js:
+
+static: It is used to serve static assets such as HTML files, images, etc.
+json: It is used to parse the incoming requests with JSON payloads. It is available with Express 4.16.0+
+urlencoded: It is used to parse the incoming requests with URL-encoded payloads. It is available with Express 4.16.0+
+Third-party Middleware: There are many third-party middleware available such as:
+
+Body-parser
+Cookie-parser
+Mongoose
+Sequelize
+Cors
+Express-validator
+To handle HTTP POST requests in Express.js version 4 and above, we have to install a middleware module called body-parser. Body-parser extracts the entire body portion of an incoming request stream and exposes it on req.body, The Middleware was a part of Express.js earlier, but now you have to install it separately. You can install it by using the following command:
+
+npm install MODULE_NAME  
+You can load it by using requires and used later:
+
+See the Example:
+
+var bodyParser = require('body-parser');  
+app.use(bodyParser.json());  
+app.use(bodyParser.urlencoded({ extended: false }))  
+Note: You can use multiple middleware as an array on a single route.
+See the Example:
+
+var middlewareArray = [middleware1, middleware2]  
+app.get('/home', middlewareArray, function (req, res, next) {  
+ //Code snippets  
+})
+
+15. Which template engines do Express support?
+
+Answer : Express.js supports any template engine that follows the (path, locals, callback) signature.
